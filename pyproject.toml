@@ -1,0 +1,33 @@
+[project]
+name = "sql-analyst-agent"
+version = "0.1.0"
+description = "Text-to-SQL data analyst agent: hand-written tool-use loop on the Anthropic SDK, tools served over MCP, SQL guardrails in code"
+readme = "README.md"
+authors = [
+    { name = "Jadson Medeiros", email = "41479996+jadson-medeiros@users.noreply.github.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "anthropic==1.15.0",
+    "mcp==2.3.0",
+    "pydantic>=2.14.1",
+    "sqlglot>=30.23.0",
+]
+
+[project.scripts]
+sql-analyst = "sql_analyst_agent.cli:main"
+sql-analyst-mcp = "sql_analyst_agent.mcp_server:main"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[build-system]
+requires = ["uv_build>=0.12.24,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+]
